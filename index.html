@@ -23,15 +23,33 @@
     </style>
 </head>
 <body class="bg-white text-gray-900">
-<!-- Navigation -->
-<nav class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
-        <h1 class="text-xl font-bold text-blue-700">BotCraft</h1>
-        <div class="space-x-4 flex items-center">
-            <a href="#services" class="text-gray-600 hover:text-blue-700 smooth-transition">Услуги</a>
-            <a href="#benefits" class="text-gray-600 hover:text-blue-700 smooth-transition">Преимущества</a>
-            <a href="#contact" class="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 smooth-transition">Заказать</a>
+<!-- Navigation Bar -->
+<nav class="bg-blue-700 text-white py-4 sticky top-0 z-50">
+    <div class="container mx-auto px-4 flex items-center justify-between">
+        <!-- Logo -->
+        <a href="#" class="text-2xl font-bold text-yellow-400">BotCraft</a>
+
+        <!-- Hamburger Button -->
+        <button id="menu-btn" class="md:hidden focus:outline-none" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobile-menu">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                <path id="close-icon" class="hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </button>
+
+        <!-- Desktop Menu -->
+        <div class="hidden md:flex space-x-6">
+            <a href="#" class="hover:text-yellow-400 transition-colors">Главная</a>
+            <a href="#services" class="hover:text-yellow-400 transition-colors">Услуги</a>
+            <a href="#contact" class="hover:text-yellow-400 transition-colors">Контакты</a>
         </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden md:hidden bg-blue-800 text-white flex flex-col items-center space-y-4 py-4">
+        <a href="#" class="hover:text-yellow-400 transition-colors">Главная</a>
+        <a href="#services" class="hover:text-yellow-400 transition-colors">Услуги</a>
+        <a href="#contact" class="hover:text-yellow-400 transition-colors">Контакты</a>
     </div>
 </nav>
 
@@ -195,6 +213,18 @@
                     spinner.classList.add('hidden');
                 });
         }
+        // Hamburger Menu Toggle
+        document.getElementById('menu-btn').addEventListener('click', () => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            const closeIcon = document.getElementById('close-icon');
+            const isExpanded = mobileMenu.classList.contains('hidden');
+
+            mobileMenu.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+            document.getElementById('menu-btn').setAttribute('aria-expanded', isExpanded);
+        });
     </script>
 </section>
 
