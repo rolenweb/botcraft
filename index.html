@@ -107,15 +107,72 @@
     <div class="container mx-auto px-4 text-center">
         <h2 class="text-2xl md:text-3xl font-bold mb-4">Закажите Telegram-бота</h2>
         <p class="text-lg mb-6">Оставьте заявку, и мы свяжемся с вами для обсуждения проекта.</p>
-        <div class="max-w-lg mx-auto">
-            <input type="text" placeholder="Ваше имя" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <input type="email" placeholder="Ваш email" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <input type="tel" placeholder="Ваш телефон" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <input type="text" placeholder="Ваш Telegram (@username)" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <textarea placeholder="Опишите задачу" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4"></textarea>
-            <button class="bg-yellow-400 text-blue-700 font-semibold py-3 px-8 rounded-full hover:bg-yellow-500 smooth-transition">Отправить заявку</button>
-        </div>
+        <form id="contact-form" onsubmit="event.preventDefault(); submitForm();" class="max-w-lg mx-auto">
+            <input type="text" id="name" placeholder="Ваше имя" aria-label="Ваше имя" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="email" id="email" placeholder="Ваш email" aria-label="Ваш email" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="tel" id="phone" placeholder="Ваш телефон" aria-label="Ваш телефон" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="text" id="telegram" placeholder="Ваш Telegram (@username)" aria-label="Ваш Telegram" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <textarea id="task" placeholder="Опишите задачу" aria-label="Описание задачи" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4"></textarea>
+            <button type="submit" id="submit-btn" class="bg-yellow-400 text-blue-700 font-semibold py-3 px-8 rounded-full hover:bg-yellow-500 smooth-transition flex items-center justify-center mx-auto" aria-label="Отправить заявку">
+                <span id="btn-text">Отправить заявку</span>
+                <svg id="spinner" class="hidden animate-spin h-5 w-5 ml-2 text-blue-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </button>
+        </form>
     </div>
+    <script>
+        function submitForm() {
+            const form = document.getElementById('contact-form');
+            const submitBtn = document.getElementById('submit-btn');
+            const btnText = document.getElementById('btn-text');
+            const spinner = document.getElementById('spinner');
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const telegram = document.getElementById('telegram').value;
+            const task = document.getElementById('task').value;
+
+            // Validation
+            if (!name || !email || !phone || !telegram || !task) {
+                alert('Пожалуйста, заполните все поля.');
+                return false;
+            }
+
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.setAttribute('aria-busy', 'true');
+            btnText.classList.add('hidden');
+            spinner.classList.remove('hidden');
+
+            const data = { name, email, phone, telegram, task };
+            fetch('https://script.google.com/macros/s/AKfycbwbY6xvLoA90PQGdHSiqSIilRvRqd29Ebtnd5LY6kUXxwkS-egeM67kxypprue-8flm/exec', {
+                method: 'POST',
+                body: JSON.stringify(data),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.text())
+                .then(result => {
+                    if (result === 'Success') {
+                        alert('Заявка успешно отправлена!');
+                        form.reset();
+                    } else {
+                        alert('Ошибка: ' + result);
+                    }
+                })
+                .catch(error => alert('Ошибка при отправке: ' + error))
+                .finally(() => {
+                    // Reset loading state
+                    submitBtn.disabled = false;
+                    submitBtn.setAttribute('aria-busy', 'false');
+                    btnText.classList.remove('hidden');
+                    spinner.classList.add('hidden');
+                });
+        }
+    </script>
 </section>
 
 <!-- Footer -->
@@ -125,4 +182,5 @@
     </div>
 </footer>
 </body>
+
 </html>
