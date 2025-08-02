@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание Telegram-ботов для финансов и бухгалтерии</title>
+    <meta name="description" content="Разрабатываем Telegram-боты для учета расходов, доходов, планирования бюджета и управления личными финансами. Простые и надежные решения.">
+    <meta name="keywords" content="бот учёт расходов телеграм, бот для домашней бухгалтерии, телеграм бот личные финансы, бот учет денег телеграм, бот для планирования бюджета, бот расходов и доходов телеграм, бот финансы в телеграм">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Плавные переходы для интерактивных элементов */
+        .smooth-transition {
+            transition: all 0.3s ease-in-out;
+        }
+        /* Улучшение типографики */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        /* Контраст для доступности */
+        .contrast-text {
+            color: #1f2937; /* Темно-серый для высокой читаемости */
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-900">
+<!-- Navigation -->
+<nav class="bg-white shadow-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+        <h1 class="text-xl font-bold text-blue-700">BotCraft</h1>
+        <div class="space-x-4 flex items-center">
+            <a href="#services" class="text-gray-600 hover:text-blue-700 smooth-transition">Услуги</a>
+            <a href="#benefits" class="text-gray-600 hover:text-blue-700 smooth-transition">Преимущества</a>
+            <a href="#contact" class="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 smooth-transition">Заказать</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero Section -->
+<section class="bg-gradient-to-r from-blue-50 to-blue-100 py-16">
+    <div class="container mx-auto px-4 text-center">
+        <h1 class="text-3xl md:text-5xl font-bold contrast-text mb-4">Telegram-боты для ваших финансов</h1>
+        <p class="text-lg md:text-xl text-gray-700 mb-6">Управляйте расходами, доходами и бюджетом прямо в Telegram</p>
+        <a href="#contact" class="inline-block bg-blue-700 text-white font-semibold py-3 px-8 rounded-full hover:bg-blue-800 smooth-transition">Создать бота сейчас</a>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section id="services" class="py-16">
+    <div class="container mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-bold text-center contrast-text mb-8">Наши услуги</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="bg-blue-50 p-6 rounded-xl shadow-sm hover:shadow-md smooth-transition">
+                <h3 class="text-xl font-semibold text-blue-700 mb-3">Учет расходов и доходов</h3>
+                <p class="text-gray-600">Простой Telegram-бот для домашней бухгалтерии: фиксируйте доходы и расходы в реальном времени.</p>
+            </div>
+            <div class="bg-blue-50 p-6 rounded-xl shadow-sm hover:shadow-md smooth-transition">
+                <h3 class="text-xl font-semibold text-blue-700 mb-3">Планирование бюджета</h3>
+                <p class="text-gray-600">Бот для планирования бюджета помогает ставить цели и контролировать траты.</p>
+            </div>
+            <div class="bg-blue-50 p-6 rounded-xl shadow-sm hover:shadow-md smooth-transition">
+                <h3 class="text-xl font-semibold text-blue-700 mb-3">Индивидуальные решения</h3>
+                <p class="text-gray-600">Создаем ботов под ваши задачи: от простых до сложных финансовых систем.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Benefits Section -->
+<section id="benefits" class="bg-gray-100 py-16">
+    <div class="container mx-auto px-4">
+        <h2 class="text-2xl md:text-3xl font-bold text-center contrast-text mb-8">Почему выбирают нас</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex items-start">
+                <span class="text-blue-700 text-2xl mr-3">✔</span>
+                <div>
+                    <h3 class="text-lg font-semibold contrast-text">Быстрая разработка</h3>
+                    <p class="text-gray-600">Запускаем вашего бота в кратчайшие сроки.</p>
+                </div>
+            </div>
+            <div class="flex items-start">
+                <span class="text-blue-700 text-2xl mr-3">✔</span>
+                <div>
+                    <h3 class="text-lg font-semibold contrast-text">Удобный интерфейс</h3>
+                    <p class="text-gray-600">Интуитивно понятные боты для пользователей любого уровня.</p>
+                </div>
+            </div>
+            <div class="flex items-start">
+                <span class="text-blue-700 text-2xl mr-3">✔</span>
+                <div>
+                    <h3 class="text-lg font-semibold contrast-text">Интеграции</h3>
+                    <p class="text-gray-600">Подключаем ботов к Google Sheets, базам данных и другим сервисам.</p>
+                </div>
+            </div>
+            <div class="flex items-start">
+                <span class="text-blue-700 text-2xl mr-3">✔</span>
+                <div>
+                    <h3 class="text-lg font-semibold contrast-text">Поддержка 24/7</h3>
+                    <p class="text-gray-600">Обновления и помощь после запуска.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact" class="bg-blue-700 text-white py-16">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-2xl md:text-3xl font-bold mb-4">Закажите Telegram-бота</h2>
+        <p class="text-lg mb-6">Оставьте заявку, и мы свяжемся с вами для обсуждения проекта.</p>
+        <div class="max-w-lg mx-auto">
+            <input type="text" placeholder="Ваше имя" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="email" placeholder="Ваш email" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="tel" placeholder="Ваш телефон" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="text" placeholder="Ваш Telegram (@username)" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <textarea placeholder="Опишите задачу" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4"></textarea>
+            <button class="bg-yellow-400 text-blue-700 font-semibold py-3 px-8 rounded-full hover:bg-yellow-500 smooth-transition">Отправить заявку</button>
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="bg-gray-900 text-white py-6">
+    <div class="container mx-auto px-4 text-center">
+        <p>&copy; 2025 BotCraft. Разработка Telegram-ботов для финансов. Все права защищены.</p>
+    </div>
+</footer>
+</body>
+</html>
