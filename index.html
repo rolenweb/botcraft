@@ -107,6 +107,7 @@
     <div class="container mx-auto px-4 text-center">
         <h2 class="text-2xl md:text-3xl font-bold mb-4">Закажите Telegram-бота</h2>
         <p class="text-lg mb-6">Оставьте заявку, и мы свяжемся с вами для обсуждения проекта.</p>
+        <div id="flash-message" class="hidden mb-4 p-4 rounded-lg text-center transition-opacity duration-500" role="alert" aria-live="assertive"></div>
         <form id="contact-form" onsubmit="event.preventDefault(); submitForm();" class="max-w-lg mx-auto">
             <input type="text" id="name" placeholder="Ваше имя" aria-label="Ваше имя" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
             <input type="email" id="email" placeholder="Ваш email" aria-label="Ваш email" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
@@ -123,6 +124,21 @@
         </form>
     </div>
     <script>
+        function showFlashMessage(message, isError = false) {
+            const flash = document.getElementById('flash-message');
+            flash.textContent = message;
+            flash.classList.remove('hidden');
+            flash.classList.add(isError ? 'bg-red-600' : 'bg-green-600');
+            flash.classList.add('opacity-100');
+            setTimeout(() => {
+                flash.classList.remove('opacity-100');
+                flash.classList.add('opacity-0');
+                setTimeout(() => {
+                    flash.classList.add('hidden');
+                    flash.classList.remove('bg-red-600', 'bg-green-600', 'opacity-0');
+                }, 500);
+            }, 3000);
+        }
         function submitForm() {
             const form = document.getElementById('contact-form');
             const submitBtn = document.getElementById('submit-btn');
@@ -136,7 +152,7 @@
 
             // Validation
             if (!name || !email || !phone || !telegram || !task) {
-                alert('Пожалуйста, заполните все поля.');
+                showFlashMessage('Пожалуйста, заполните все поля.', true);
                 return false;
             }
 
@@ -164,10 +180,10 @@
                 .then(response => response.text())
                 .then(result => {
                     if (result === 'Success') {
-                        alert('Заявка успешно отправлена!');
+                        showFlashMessage('Заявка успешно отправлена!');
                         form.reset();
                     } else {
-                        alert('Ошибка: ' + result);
+                        showFlashMessage('Ошибка: ' + result, true);
                     }
                 })
                 .catch(error => alert('Ошибка при отправке: ' + error))
