@@ -11,6 +11,11 @@
     <style>
         body { font-family: 'Arial', sans-serif; }
         .telegram-bg { background: linear-gradient(to right, #0088cc, #33b5e5); }
+        .flash-message { transition: opacity 0.5s ease; }
+        .flash-message.hidden { opacity: 0; display: none; }
+        .spinner { display: none; }
+        .loading .spinner { display: inline-block; }
+        .loading .button-text { display: none; }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -112,11 +117,19 @@
     <div class="max-w-6xl mx-auto text-center">
         <h2 class="text-3xl font-bold mb-8">Закажите разработку Telegram-бота для HR</h2>
         <div class="max-w-md mx-auto bg-white p-6 rounded-lg text-gray-800">
-            <input type="text" placeholder="Имя" class="w-full p-3 mb-4 border rounded-lg">
-            <input type="email" placeholder="Email" class="w-full p-3 mb-4 border rounded-lg">
-            <input type="tel" placeholder="Телефон (опционально)" class="w-full p-3 mb-4 border rounded-lg">
-            <textarea placeholder="Краткое описание задачи (опционально)" class="w-full p-3 mb-4 border rounded-lg"></textarea>
-            <button class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition">Запросить консультацию</button>
+            <div id="flash-message" class="flash-message hidden mb-4 p-3 rounded-lg"></div>
+            <input type="text" id="name" placeholder="Имя" class="w-full p-3 mb-4 border rounded-lg">
+            <input type="email" id="email" placeholder="Email" class="w-full p-3 mb-4 border rounded-lg">
+            <input type="tel" id="phone" placeholder="Телефон (опционально)" class="w-full p-3 mb-4 border rounded-lg">
+            <input type="tel" id="telegram" placeholder="Ваш Telegram (@username) (опционально)" class="w-full p-3 mb-4 border rounded-lg">
+            <textarea id="message" placeholder="Краткое описание задачи (опционально)" class="w-full p-3 mb-4 border rounded-lg"></textarea>
+            <button id="submit-btn" class="w-full bg-blue-600 text-white font-semibold py-3 rounded-lg hover:bg-blue-700 transition flex items-center justify-center">
+                <span class="button-text">Запросить консультацию</span>
+                <svg class="spinner h-5 w-5 animate-spin text-white hidden" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </button>
             <p class="mt-4 text-sm">Мы свяжемся в течение 24 часов, чтобы обсудить ваш проект.</p>
         </div>
     </div>
@@ -157,10 +170,96 @@
     </div>
 </section>
 
-<!-- Analytics -->
+<!-- JavaScript for Flash Messages and Loading -->
 <script>
     // Placeholder for Yandex.Metrika or Google Analytics
     console.log("Analytics script placeholder");
+
+    // Flash message and loading handling
+    const form = document.querySelector('#contact form');
+    const flashMessage = document.getElementById('flash-message');
+    const submitBtn = document.getElementById('submit-btn');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const telegramInput = document.getElementById('telegram');
+    const messageInput = document.getElementById('message');
+
+    function showFlashMessage(message, type) {
+        flashMessage.textContent = message;
+        flashMessage.className = `flash-message p-3 rounded-lg mb-4 ${type === 'success' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`;
+        flashMessage.classList.remove('hidden');
+        setTimeout(() => {
+            flashMessage.classList.add('hidden');
+        }, 3000);
+    }
+
+    submitBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+
+        if (name === '' || email === '') {
+            showFlashMessage('Пожалуйста, заполните имя и email.', 'error');
+            return;
+        }
+
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+            showFlashMessage('Пожалуйста, введите корректный email.', 'error');
+            return;
+        }
+
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.classList.add('loading');
+
+        const formData = new URLSearchParams({
+            name: name,
+            email: email,
+            phone: phoneInput.value,
+            telegram: telegramInput.value,
+            task: messageInput.value,
+            type: "HR"
+        });
+        fetch('https://script.google.com/macros/s/AKfycbwbY6xvLoA90PQGdHSiqSIilRvRqd29Ebtnd5LY6kUXxwkS-egeM67kxypprue-8flm/exec', {
+            method: "POST",
+            body: formData,
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            }
+        })
+            .then(response => response.text())
+            .then(result => {
+                if (result === 'Success') {
+                    showFlashMessage('Заявка успешно отправлена! Мы свяжемся с вами в течение 24 часов.', 'success');
+                } else {
+                    showFlashMessage('Ошибка: ' + result, true);
+                }
+            })
+            .catch(error => showFlashMessage('Ошибка при отправке: ' + error))
+            .finally(() => {
+                submitBtn.disabled = false;
+                submitBtn.classList.remove('loading');
+                nameInput.value = '';
+                emailInput.value = '';
+                phoneInput.value = '';
+                telegramInput.value = '';
+                messageInput.value = '';
+            });
+    });
 </script>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=103578711', 'ym');
+
+    ym(103578711, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/103578711" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </body>
 </html>
