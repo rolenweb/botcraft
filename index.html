@@ -129,9 +129,9 @@
         <form id="contact-form" onsubmit="event.preventDefault(); submitForm();" class="max-w-lg mx-auto">
             <input type="text" id="name" placeholder="Ваше имя" aria-label="Ваше имя" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
             <input type="email" id="email" placeholder="Ваш email" aria-label="Ваш email" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <input type="tel" id="phone" placeholder="Ваш телефон" aria-label="Ваш телефон" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <input type="text" id="telegram" placeholder="Ваш Telegram (@username)" aria-label="Ваш Telegram" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <textarea id="task" placeholder="Опишите задачу" aria-label="Описание задачи" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4"></textarea>
+            <input type="tel" id="phone" placeholder="Ваш телефон (опционально)" aria-label="Ваш телефон" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <input type="text" id="telegram" placeholder="Ваш Telegram (@username) (опционально)" aria-label="Ваш Telegram" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <textarea id="task" placeholder="Опишите задачу (опционально)" aria-label="Описание задачи" class="w-full mb-4 p-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500" rows="4"></textarea>
             <button type="submit" id="submit-btn" class="bg-yellow-400 text-blue-700 font-semibold py-3 px-8 rounded-full hover:bg-yellow-500 smooth-transition flex items-center justify-center mx-auto" aria-label="Отправить заявку">
                 <span id="btn-text">Отправить заявку</span>
                 <svg id="spinner" class="hidden animate-spin h-5 w-5 ml-2 text-blue-700" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -169,7 +169,7 @@
             const task = document.getElementById('task').value;
 
             // Validation
-            if (!name || !email || !phone || !telegram || !task) {
+            if (!name || !email) {
                 showFlashMessage('Пожалуйста, заполните все поля.', true);
                 return false;
             }
@@ -186,7 +186,8 @@
                 email: email,
                 phone: phone,
                 telegram: telegram,
-                task: task
+                task: task,
+                type: "budget"
             });
             fetch('https://script.google.com/macros/s/AKfycbwbY6xvLoA90PQGdHSiqSIilRvRqd29Ebtnd5LY6kUXxwkS-egeM67kxypprue-8flm/exec', {
                 method: "POST",
