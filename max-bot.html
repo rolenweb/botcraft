@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Разработка чат-бота для MAX - Кастомные боты под ключ</title>
+  <meta name="description" content="Закажите разработку чат-бота для мессенджера MAX под ключ. Кастомные решения, интеграция с API, CRM, автоматизация продаж и поддержки клиентов.">
+  <meta name="keywords" content="разработка бота для max, создать бота max, бот для мессенджера max, заказать бота max, max bot разработка, max бот под ключ, max bot api разработка, интеграция max bot, создание чат-бота для max, max bot для продаж">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+    .gradient-bg {
+      background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+    }
+    .flash-message {
+      transition: opacity 0.5s ease-in-out;
+      opacity: 0;
+    }
+    .flash-message.show {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="bg-gray-100">
+<!-- Шапка -->
+<header class="gradient-bg text-white py-6">
+  <div class="container mx-auto px-4 text-center">
+    <h1 class="text-3xl md:text-4xl font-bold">Разработка чат-ботов для MAX под ваш бизнес</h1>
+    <p class="mt-2 text-lg md:text-xl">Кастомные боты под ключ с интеграцией API для автоматизации продаж и поддержки.</p>
+    <a href="#get-started" class="mt-4 inline-block bg-white text-blue-600 font-semibold py-3 px-6 rounded-lg hover:bg-blue-100 transition">Заказать бота</a>
+  </div>
+</header>
+
+<!-- Секция преимуществ -->
+<section id="features" class="py-12 bg-white">
+  <div class="container mx-auto px-4">
+    <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8">Почему заказать разработку MAX бота у нас?</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="text-center p-6 bg-gray-50 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold text-gray-800">Кастомные боты с кодом</h3>
+        <p class="mt-2 text-gray-600">Разрабатываем сложные чат-боты для MAX с использованием API под ваши задачи.</p>
+      </div>
+      <div class="text-center p-6 bg-gray-50 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold text-gray-800">Интеграция с CRM и маркетинг</h3>
+        <p class="mt-2 text-gray-600">Подключаем ботов к вашим CRM, платежам и Госуслугам для полной автоматизации.</p>
+      </div>
+      <div class="text-center p-6 bg-gray-50 rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold text-gray-800">Боты для продаж и поддержки</h3>
+        <p class="mt-2 text-gray-600">Автоматизируйте продажи и клиентскую поддержку с ботами, настроенными под бизнес.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Секция примеров использования -->
+<section id="use-cases" class="py-12 bg-gray-100">
+  <div class="container mx-auto px-4">
+    <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8">Примеры использования ботов MAX</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="p-6 bg-white rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold text-gray-800">Бот для продаж</h3>
+        <p class="mt-2 text-gray-600">Автоматизируйте воронку продаж: от консультации до оплаты через экосистему MAX.</p>
+      </div>
+      <div class="p-6 bg-white rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold text-gray-800">Бот для поддержки</h3>
+        <p class="mt-2 text-gray-600">Обрабатывайте запросы клиентов 24/7 с интеграцией в вашу CRM-систему.</p>
+      </div>
+      <div class="p-6 bg-white rounded-lg shadow-md">
+        <h3 class="text-xl font-semibold text-gray-800">Бот для маркетинга</h3>
+        <p class="mt-2 text-gray-600">Запускайте персонализированные кампании и собирайте лиды через MAX.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Секция призыва к действию с формой заказа -->
+<section id="get-started" class="py-12 gradient-bg text-white">
+  <div class="container mx-auto px-4 text-center">
+    <h2 class="text-2xl md:text-3xl font-bold">Закажите кастомный MAX бот под ключ</h2>
+    <p class="mt-2 text-lg">Оставьте заявку, и мы разработаем бота для автоматизации вашего бизнеса.</p>
+    <div id="flash-message" class="hidden flash-message mt-4 p-4 rounded-lg text-center"></div>
+    <div class="mt-8 max-w-lg mx-auto bg-white p-6 rounded-lg shadow-md text-gray-800">
+      <div class="grid grid-cols-1 gap-4">
+        <input type="text" id="name" placeholder="Ваше имя" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+        <input type="email" id="email" placeholder="Ваш email" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+        <input type="tel" id="phone" placeholder="Ваш телефон" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600">
+        <textarea id="task" placeholder="Опишите вашу задачу" class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 h-32"></textarea>
+        <button id="submit-btn" class="bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg hover:bg-blue-700 transition">Отправить заявку</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Футер -->
+<footer class="py-6 bg-gray-800 text-white">
+  <div class="container mx-auto px-4 text-center">
+    <p>&copy; 2025 Разработка чат-ботов для MAX. Все права защищены.</p>
+  </div>
+</footer>
+
+<script>
+  // Плавная прокрутка для ссылок
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      document.querySelector(this.getAttribute('href')).scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  });
+
+  // Обработка формы и всплывающих сообщений
+  const submitBtn = document.getElementById('submit-btn');
+  const flashMessage = document.getElementById('flash-message');
+  const nameInput = document.getElementById('name');
+  const emailInput = document.getElementById('email');
+  const phoneInput = document.getElementById('phone');
+  const taskInput = document.getElementById('task');
+
+  submitBtn.addEventListener('click', () => {
+    // Простая валидация
+    if (!nameInput.value || !emailInput.value || !phoneInput.value || !taskInput.value) {
+      flashMessage.classList.remove('hidden', 'bg-green-500');
+      flashMessage.classList.add('bg-red-500', 'show');
+      flashMessage.textContent = 'Ошибка: Заполните все поля!';
+    } else {
+      flashMessage.classList.remove('hidden', 'bg-red-500');
+      flashMessage.classList.add('bg-green-500', 'show');
+      flashMessage.textContent = 'Заявка отправлена! Мы свяжемся с вами скоро.';
+      // Очистка формы
+      nameInput.value = '';
+      emailInput.value = '';
+      phoneInput.value = '';
+      taskInput.value = '';
+    }
+
+    // Скрыть сообщение через 3 секунды
+    setTimeout(() => {
+      flashMessage.classList.remove('show');
+      flashMessage.classList.add('hidden');
+    }, 3000);
+  });
+</script>
+</body>
+</html>
